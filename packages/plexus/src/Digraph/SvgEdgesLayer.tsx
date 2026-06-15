@@ -13,10 +13,9 @@ type TProps<T = {}, U = {}> = Omit<TStandaloneEdgesLayer<T, U>, 'edges' | 'layer
   standalone?: boolean;
 };
 
-// Add the default black stroke on an outer <g> so CSS classes or styles
-// on the inner <g> can override it
-// TODO: A more configurable approach to setting a default stroke color
-const INHERIT_STROKE = { stroke: '#000' };
+// Use currentColor so the stroke inherits the CSS text color and is theme-aware
+// (avoids hardcoded black that is invisible in dark mode)
+const INHERIT_STROKE = { stroke: 'currentColor' };
 
 const SvgEdgesLayer = <T = {}, U = {}>(props: TProps<T, U>) => {
   const { getClassName, graphState, markerEndId, markerStartId, setOnEdge } = props;
